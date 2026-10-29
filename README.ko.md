@@ -29,6 +29,29 @@ AI 에이전트로 금융 데이터 백엔드를 만들고, 에이전트를 믿�
 - **숫자 계산은 모델에게 시키지 않는다.** 잔액·점수·카드 글자는 코드가 계산하거나 그린다. 모델은 판단하고 설명한다.
 - **증명하지 못한 것은 적어 둔다.** Mandate README에는 "Not claimed" 절이 있다. QuantPilot은 후보 전략이 전부 walk-forward·무작위 대조 게이트를 통과하지 못해 접었고, 실제 돈은 넣지 않았다.
 
+### 1인 기업 마케팅, 자동으로
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/engine-dark.svg"><img src="assets/engine-light.svg" width="100%" alt="콘텐츠 엔진: 매일 다이제스트 수집, Claude 초안, 목소리 규칙 20개 채점, 사람이 머지하면 발행. 가동 중: 블로그·Threads. 만들어 둠: 인스타 캐러셀·9:16 릴스·긴 영상→쇼츠·뉴스레터."></picture>
+
+- **주제 하나가 채널 여섯 개로 나간다.** 매일 다이제스트가 소스를 모으고, Claude가 초안을 쓰고, 채점기가 목소리 규칙 20개와 "숫자가 전부 출처에 있는지"를 검사한다. 발행 버튼은 PR 머지 하나뿐이다. 코드: [seungbin-dev](https://github.com/inpilot-dev/seungbin-dev).
+- **지금 가동 중:** [inpilot.dev](https://inpilot.dev) 블로그(글 45편, 토요일마다 새 초안)와 Threads(월·수·금 발행 큐). 매일 다이제스트는 지금까지 32번 모두 성공했다.
+- **만들어 두고 아직 켜지 않은 것:** 인스타그램 캐러셀(1080×1350, 글자는 코드가 그린다), 9:16 릴스(Remotion), 긴 영상을 60초 쇼츠로 자르는 컷터(Whisper + 남길 구간을 LLM이 고른다), 주간 뉴스레터(Resend). 켜기 전까지는 모두 드라이런에서 멈춘다.
+
+### 만들 수 있는 것
+
+| 층 | 써 본 것 | 어디서 |
+|---|---|---|
+| 프런트엔드 | Next.js 16 · React · Vite · Tailwind · shadcn/Radix · MDX · 오프라인 PWA · Three.js | [inpilot.dev](https://inpilot.dev) · [hacku-2026](https://github.com/inpilot-dev/hacku-2026) · overload-log, char-kit *(비공개)* |
+| 백엔드 | FastAPI · Java 17 + Spring Boot(헥사고날, ArchUnit) · Node/Bun · 서버리스 함수 | [reviewPaper](https://github.com/inpilot-dev/reviewPaper) · [hacku-2026](https://github.com/inpilot-dev/hacku-2026) · order-ledger *(비공개)* |
+| 데이터 | PostgreSQL/Supabase · pgvector · SQLite · Oracle · 이벤트 소싱 · Flyway 마이그레이션 · Kafka · Redis | [ledger-exceptions](https://github.com/inpilot-dev/ledger-exceptions) · order-ledger, NutriCoach *(비공개)* |
+| AI | Claude API(인용) · `claude -p` · Ollama · RAG · 평가 게이트 · MCP 서버 · 브라우저 에이전트 · Claude Code 스킬·플러그인·훅 | [Research](https://github.com/inpilot-dev/Research) · [reviewPaper](https://github.com/inpilot-dev/reviewPaper) · [hacku-2026](https://github.com/inpilot-dev/hacku-2026) · [prompt-forge](https://github.com/inpilot-dev/prompt-forge) |
+| 자동화 | GitHub Actions · launchd 데몬 · 디스코드/텔레그램 봇 · Playwright 렌더링 · 헤드리스 Chrome PDF | [seungbin-dev](https://github.com/inpilot-dev/seungbin-dev) · brain-secretary, card-news *(비공개)* |
+| 영상·그래픽 | Remotion · 생성 SVG · canvas | motion *(비공개)* · [이 README](scripts/build_svgs.py) |
+| 인프라 | Docker/Compose · Vercel · Fly.io · GitHub Pages · CI | [reviewPaper](https://github.com/inpilot-dev/reviewPaper)(Fly.io) · [inpilot.dev](https://inpilot.dev)·[sector-weather](https://sector-weather.vercel.app)(Vercel) |
+| 테스트 | pytest · JUnit 5 + Testcontainers · vitest · Playwright e2e · Z3 모델 체킹 · 손으로 코드를 망가뜨려 확인한 단정 | [hacku-2026](https://github.com/inpilot-dev/hacku-2026) · [Research](https://github.com/inpilot-dev/Research) · order-ledger *(비공개)* |
+| 시장 데이터 | OKX(ccxt) · 한국투자증권 Open API · Alpaca WebSocket · Polymarket | QuantPilot, sector-weather, order-ledger, polymarket-bot *(비공개)* |
+| 모바일 | SwiftUI | mofit-ios, iOS 프로토타입 *(비공개)* |
+
 <table><tr><td valign="top" width="58%">
 
 **최근 글** <sub>([RSS](https://inpilot.dev/rss.xml)에서 매일 갱신)</sub>
@@ -56,4 +79,4 @@ AI 에이전트로 금융 데이터 백엔드를 만들고, 에이전트를 믿�
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/inpilot-dev/inpilot-dev/output/snake-dark.svg"><img src="https://raw.githubusercontent.com/inpilot-dev/inpilot-dev/output/snake.svg" width="100%" alt="Contribution graph eaten by a snake"></picture>
 
-<sub>Python · FastAPI · TypeScript · Next.js · Supabase/pgvector · SQLite · Docker · GitHub Actions · Vercel · Claude API · Ollama · Z3 — 배우는 중: Kotlin · Spring · Kafka. 이 README의 그림은 [`scripts/build_svgs.py`](scripts/build_svgs.py)가 만든다.</sub>
+<sub>이 README의 그림은 [`scripts/build_svgs.py`](scripts/build_svgs.py)가 만든다. 숫자는 링크된 각 repo 기준(2026년 10월).</sub>

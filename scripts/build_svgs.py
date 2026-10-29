@@ -25,7 +25,8 @@ FACTS = [
     ("school", "HKU · Data Science & Engineering · Hong Kong"),
     ("method", "rules compute · model judges · human owns the doubt"),
     ("agents", "Claude Code · skills · hooks · subagents · evals"),
-    ("stack", "Python FastAPI TypeScript Next.js Supabase Docker"),
+    ("stack", "Next.js · FastAPI · Spring Boot · Postgres · Docker"),
+    ("content", "blog + Threads on autopilot · 4 more channels built"),
     ("writing", "inpilot.dev"),
 ]
 
@@ -56,6 +57,17 @@ CARDS = [  # (file, kicker, title, lines, metric, metric_label, tags)
      "250", "tests passing", "Python stdlib · hooks · subagents"),
 ]
 
+# content engine: (name, status, detail). LIVE = publishes on schedule today, BUILT = stops at a dry run
+CHANNELS = [
+    ("Blog · inpilot.dev", "LIVE", "45 posts · drafts every Sat"),
+    ("Threads", "LIVE", "Mon/Wed/Fri 09:00 queue"),
+    ("Instagram carousel", "BUILT", "1080×1350 cards + caption"),
+    ("Reels 9:16", "BUILT", "Remotion, animated text"),
+    ("Shorts from long video", "BUILT", "Whisper + LLM picks cuts"),
+    ("Newsletter", "BUILT", "weekly issue via Resend"),
+]
+STAGES = [("Collect", "daily digest"), ("Draft", "Claude"), ("Grade", "20 voice rules"), ("Human", "merge = publish")]
+
 REDUCED = ("@media (prefers-reduced-motion: reduce){*{animation:none!important;opacity:1!important;"
            "clip-path:none!important;stroke-dashoffset:0!important}.pulse{display:none}}")
 
@@ -66,7 +78,7 @@ def svg(w, h, body, style="", label=""):
 
 
 def hero(t):
-    w, h = 900, 330
+    w, h = 900, 356
     parts = [f'<rect x="1" y="1" width="{w-2}" height="{h-2}" rx="14" fill="{t["card"]}" stroke="{t["line"]}"/>',
              *(f'<circle cx="{26+i*20}" cy="24" r="6" fill="{c}"/>' for i, c in enumerate(["#ff5f57", "#febc2e", "#28c840"])),
              f'<text x="{w/2}" y="29" fill="{t["mute"]}" font-size="13" text-anchor="middle">seungbin@inpilot-dev: ~</text>',
@@ -167,11 +179,61 @@ def flow(t):
                "writing tests first, a gate of tests and evals (fail goes back to the subagent), then human review.")
 
 
+def engine(t):
+    w, h = 900, 350
+    y, xs, hw = 190, [76, 200, 324, 448], 46
+    p, d = [], 0.0
+    p.append(f'<text x="30" y="36" font-family="{MONO}" font-size="13" fill="{t["mute"]}">one topic in, six channels out</text>')
+    for i, ((name, sub), x) in enumerate(zip(STAGES, xs)):
+        if i:
+            p.append(f'<line class="draw" style="animation-delay:{d:.2f}s" x1="{xs[i-1]+hw}" y1="{y}" x2="{x-hw-12}" y2="{y}" '
+                     f'stroke="{t["mute"]}" stroke-width="2" marker-end="url(#ea)" pathLength="1"/>')
+            d += 0.2
+        stroke = t["acc2"] if name == "Human" else (t["acc"] if name == "Grade" else t["line"])
+        p.append(f'<g class="node" style="animation-delay:{d:.2f}s"><rect x="{x-hw}" y="{y-28}" width="{hw*2}" height="56" rx="10" '
+                 f'fill="{t["card"]}" stroke="{stroke}" stroke-width="2"/><text x="{x}" y="{y+5}" class="n">{name}</text>'
+                 f'<text x="{x}" y="{y+50}" class="s">{escape(sub)}</text></g>')
+        d += 0.2
+    hub = 524
+    p.append(f'<line class="draw" style="animation-delay:{d:.2f}s" x1="{xs[-1]+hw}" y1="{y}" x2="{hub}" y2="{y}" stroke="{t["mute"]}" stroke-width="2" pathLength="1"/>')
+    p.append(f'<circle class="pulse" r="5" fill="{t["acc"]}"><animateMotion dur="2.6s" begin="{d+1.6:.1f}s" repeatCount="indefinite" path="M10 {y} L{hub} {y}"/></circle>')
+    d += 0.2
+    for i, (name, status, detail) in enumerate(CHANNELS):
+        cy = 58 + i * 50
+        live = status == "LIVE"
+        col = t["acc"] if live else t["mute"]
+        curve = f'd="M{hub} {y} C {hub+40} {y}, {hub+20} {cy}, 578 {cy}" fill="none" stroke="{col}"'
+        p.append(f'<path class="draw" style="animation-delay:{d:.2f}s" {curve} stroke-width="2" pathLength="1"/>' if live
+                 else f'<path class="node" style="animation-delay:{d:.2f}s" {curve} stroke-width="1.5" stroke-dasharray="4 4"/>')
+        dot = (f'<circle class="{"beat" if live else ""}" cx="590" cy="{cy}" r="6" fill="{col}"/>' if live
+               else f'<circle cx="590" cy="{cy}" r="5.5" fill="none" stroke="{col}" stroke-width="2"/>')
+        p.append(f'<g class="node" style="animation-delay:{d+0.15:.2f}s">{dot}'
+                 f'<text x="606" y="{cy-3}" font-family="{SANS}" font-size="15" font-weight="600" fill="{t["fg"]}">{escape(name)}</text>'
+                 f'<text x="606" y="{cy+14}" font-family="{MONO}" font-size="11.5" fill="{t["mute"]}">'
+                 f'<tspan fill="{col}" font-weight="700">{status}</tspan> · {escape(detail)}</text></g>')
+        d += 0.12
+    p.append(f'<text class="node" style="animation-delay:{d:.2f}s" x="30" y="{h-22}" font-family="{MONO}" font-size="11.5" fill="{t["mute"]}">'
+             f'<tspan fill="{t["acc"]}">●</tspan> LIVE on schedule   ○ BUILT, dry run   · 15 workflows</text>')
+    defs = (f'<defs><marker id="ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">'
+            f'<path d="M0 0L10 5L0 10z" fill="{t["mute"]}"/></marker></defs>')
+    style = (f".n{{font-family:{SANS};font-size:15px;font-weight:600;fill:{t['fg']};text-anchor:middle}}"
+             f".s{{font-family:{MONO};font-size:11px;fill:{t['mute']};text-anchor:middle}}"
+             ".node{opacity:0;animation:fade .4s ease-out forwards}@keyframes fade{to{opacity:1}}"
+             ".draw{opacity:0;stroke-dasharray:1;stroke-dashoffset:1;animation:draw .35s ease-out forwards}"
+             "@keyframes draw{1%{opacity:1}to{opacity:1;stroke-dashoffset:0}}"
+             f".pulse{{opacity:0;animation:fade .2s {d:.1f}s forwards}}"
+             ".beat{animation:beat 2s ease-in-out infinite}@keyframes beat{50%{opacity:.35}}")
+    return svg(w, h, defs + "".join(p), style,
+               "Content engine: collect a daily digest, Claude drafts, a grader checks 20 voice rules, a human merges to publish. "
+               + "; ".join(f"{n}: {s_}, {d_}" for n, s_, d_ in CHANNELS))
+
+
 if __name__ == "__main__":
     OUT.mkdir(exist_ok=True)
     for name, t in THEMES.items():
         (OUT / f"hero-{name}.svg").write_text(hero(t))
         (OUT / f"flow-{name}.svg").write_text(flow(t))
+        (OUT / f"engine-{name}.svg").write_text(engine(t))
         for c in CARDS:
             (OUT / f"card-{c[0]}-{name}.svg").write_text(card(t, *c[1:]))
     print(f"wrote {len(list(OUT.glob('*.svg')))} files to {OUT}")
