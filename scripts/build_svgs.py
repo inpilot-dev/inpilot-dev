@@ -50,10 +50,10 @@ CARDS = [  # (file, kicker, title, lines, metric, metric_label, tags)
      ["The pipeline behind my blog: draft, LLM grader,", "human review, publish. The grader checks",
       "20 voice rules; no grader means FAIL."],
      "15", "GitHub Actions workflows", "Next.js · MDX · GitHub Actions"),
-    ("private", "private · no links", "Running every day",
-     ["Personal OS: a Claude Code-run knowledge vault.", "A Claude Code plugin with a Stop-hook test gate.",
-      "A launchd briefing bot, 29 tests, mutation-tested."],
-     "275", "commits in QuantPilot, shelved by its gates", "launchd · hooks · TDD subagents"),
+    ("research", "public · Claude Code + Codex plugin", "Research · verify",
+     ["Opens the source of every cited sentence and checks", "the sentence is really there. Verified, not",
+      "supported, couldn't check: never mixed."],
+     "250", "tests passing", "Python stdlib · hooks · subagents"),
 ]
 
 REDUCED = ("@media (prefers-reduced-motion: reduce){*{animation:none!important;opacity:1!important;"

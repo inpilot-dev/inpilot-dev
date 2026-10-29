@@ -17,7 +17,7 @@ AI 에이전트로 금융 데이터 백엔드를 만들고, 에이전트를 믿�
 </p>
 <p>
   <a href="https://github.com/inpilot-dev/seungbin-dev"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-seungbin-dev-dark.svg"><img src="assets/card-seungbin-dev-light.svg" width="49%" alt="seungbin-dev — blog pipeline with an LLM grader"></picture></a>
-  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-private-dark.svg"><img src="assets/card-private-light.svg" width="49%" alt="Private systems — personal OS, Claude Code plugin, briefing bot"></picture>
+  <a href="https://github.com/inpilot-dev/Research"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-research-dark.svg"><img src="assets/card-research-light.svg" width="49%" alt="Research · verify — checks cited sentences against their sources, 250 tests passing"></picture></a>
 </p>
 
 ### 에이전트와 일하는 방식
@@ -49,6 +49,8 @@ AI 에이전트로 금융 데이터 백엔드를 만들고, 에이전트를 믿�
 - seungbin-plugin: grill → spec → tickets → build, Stop 훅 테스트 게이트
 - brain-secretary: 표준 라이브러리만 쓰는 브리핑 봇, 테스트 29개, 뮤테이션 테스트
 - card-news: 주제 한 줄 → 카드 8장, 글자는 코드가 그린다
+- polymarket-bot: 자율 개발 루프, 일 하나마다 헤드리스 Claude 세션을 새로 열고 커밋 하나
+- sector-weather: 4주 팀 실험, 업종 지수 → 트리맵·LLM 설명·전망 채점 ([아카이브](https://sector-weather.vercel.app))
 
 </td></tr></table>
 

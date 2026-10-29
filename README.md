@@ -17,7 +17,7 @@ I build backends for financial data with AI agents, and the checks that keep the
 </p>
 <p>
   <a href="https://github.com/inpilot-dev/seungbin-dev"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-seungbin-dev-dark.svg"><img src="assets/card-seungbin-dev-light.svg" width="49%" alt="seungbin-dev — blog pipeline with an LLM grader"></picture></a>
-  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-private-dark.svg"><img src="assets/card-private-light.svg" width="49%" alt="Private systems — personal OS, Claude Code plugin, briefing bot"></picture>
+  <a href="https://github.com/inpilot-dev/Research"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-research-dark.svg"><img src="assets/card-research-light.svg" width="49%" alt="Research · verify — checks cited sentences against their sources, 250 tests passing"></picture></a>
 </p>
 
 ### How I work with agents
@@ -49,6 +49,8 @@ I build backends for financial data with AI agents, and the checks that keep the
 - seungbin-plugin: grill → spec → tickets → build, Stop-hook test gate
 - brain-secretary: stdlib-only briefing bot, 29 tests, mutation-tested
 - card-news: topic → 8 cards, text drawn by code
+- polymarket-bot: autonomous dev loop, a fresh headless Claude session per task, one commit each
+- sector-weather: 4-week team experiment, sector index → treemap, LLM explanation, scored forecasts ([archive](https://sector-weather.vercel.app))
 
 </td></tr></table>
 
